@@ -1,1 +1,23 @@
-{}
+{
+  "name": "@nichoth/ssc-flume",
+  "description": "SSC db built with [flume db](https://github.com/flumedb/flumedb)",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichoth/ssc-flume.git"
+  },
+  "author": "Nick Thomas <nichoth@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nichoth/ssc-flume/issues"
+  },
+  "homepage": "https://github.com/nichoth/ssc-flume#readme",
+  "devDependencies": {
+    "tap-spec": "^5.0.0",
+    "tape": "^5.2.2"
+  }
+}
