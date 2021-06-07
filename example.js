@@ -3,7 +3,8 @@ var http = require('http')
 var WS_PORT = process.env.WS_PORT || 8888
 var ws = require('pull-ws/server')
 var muxrpc = require('muxrpc')
-var { createFeed } = require('./')
+var server = require('./')
+var { manifest } = server
 // var manifest = require('./manifest.json')
 
 // in here, we make an http & ws server that makes calls to the ssb feed
@@ -56,19 +57,17 @@ ws({
     // need to verify that the connector has the corresponding private key
     // for a given public key
 
-    var keys = { public: 'a', private: 'b' }
+    // var keys = { public: 'a', private: 'b' }
+    // var feed = createFeed(keys)
 
-    var feed = createFeed(keys)
+    // should have
+    var api = server.api
 
-    var manifest = {
-        foo: 'async'
-    }
-
-    var api = {
-        foo: function (arg, cb) {
-            process.nextTick(() => cb(null, arg))
-        }
-    }
+    // var api = {
+    //     foo: function (arg, cb) {
+    //         process.nextTick(() => cb(null, arg))
+    //     }
+    // }
 
     // arguments are (remote, local)
     var rpcServer = muxrpc(null, manifest)(api)

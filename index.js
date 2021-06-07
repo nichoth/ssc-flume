@@ -3,7 +3,7 @@ var ssbFeed = require('ssb-feed')
 var Config = require('ssb-config/inject')
 var ssbKeys = require('ssb-keys')
 var caps = require('ssb-caps')
-var fs = require('fs')
+// var fs = require('fs')
 var path = require('path')
 
 var config = Config('ssc', { caps })
@@ -28,7 +28,26 @@ function createFeed (keys) {
     return feed
 }
 
-module.exports = { createFeed }
+var manifest = {
+    foo: 'async',
+    publish: 'async'
+}
+
+var api = {
+    foo: function (arg, cb) {
+        process.nextTick(() => cb(null, arg))
+    },
+
+    publish: function (msg, cb) {
+        // you can verify the msg just with the msg itself
+        // public key is the auther ID
+        // use the public key to check the authenticity
+        process.nextTick(() => cb(null, msg))
+    }
+}
+
+
+module.exports = { api, createFeed, manifest }
 
 // save an updated list of methods this server has made public
 // in a location that ssb-client will know to check
