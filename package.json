@@ -4,6 +4,10 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "npm run build && concurrently --kill-others \"node example.js\" \"npx ecstatic public\"",
+    "build": "npm run build-js",
+    "build-js": "browserify -p esmify -t uglifyify --debug browser-example.js > public/bundle.js",
+    "build-sass": "sass src/style/main.scss public/style.css",
     "test": "tape test/*.js | tap-spec"
   },
   "repository": {
@@ -17,8 +21,14 @@
   },
   "homepage": "https://github.com/nichoth/ssc-flume#readme",
   "devDependencies": {
+    "browserify": "^17.0.0",
+    "concurrently": "^6.2.0",
+    "ecstatic": "^4.1.4",
+    "esmify": "^2.1.1",
+    "sass": "^1.34.1",
     "tap-spec": "^5.0.0",
-    "tape": "^5.2.2"
+    "tape": "^5.2.2",
+    "uglifyify": "^5.0.2"
   },
   "dependencies": {
     "muxrpc": "^6.5.3",
@@ -26,6 +36,7 @@
     "ssb-backlinks": "^2.1.1",
     "ssb-caps": "^1.1.0",
     "ssb-config": "^3.4.5",
+    "ssb-feed": "^2.3.0",
     "ssb-gossip": "^1.1.1",
     "ssb-keys": "^7.2.2",
     "ssb-master": "^1.0.3",
