@@ -17,7 +17,8 @@ function onConnect (err, wsStream) {
     console.log('** on connect **')
 
     var manifest = {
-        foo: 'async'
+        foo: 'async',
+        publish: 'async'
     }
 
     // sbot is rpc client
