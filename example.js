@@ -4,7 +4,7 @@ var WS_PORT = process.env.WS_PORT || 8888
 var ws = require('pull-ws/server')
 var muxrpc = require('muxrpc')
 var { createFeed } = require('./')
-var manifest = require('./manifest.json')
+// var manifest = require('./manifest.json')
 
 // in here, we make an http & ws server that makes calls to the ssb feed
 // in `createFeed`
@@ -60,8 +60,18 @@ ws({
 
     var feed = createFeed(keys)
 
+    var manifest = {
+        foo: 'async'
+    }
+
+    var api = {
+        foo: function (arg, cb) {
+            process.nextTick(() => cb(null, arg))
+        }
+    }
+
     // arguments are (remote, local)
-    var rpcServer = muxrpc(null, manifest)(feed)
+    var rpcServer = muxrpc(null, manifest)(api)
     var rpcServerStream = rpcServer.createStream(function onEnd (err) {
         if (err) console.log('rpc stream close', err)
     })

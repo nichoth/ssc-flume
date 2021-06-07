@@ -22,20 +22,26 @@ Server
 var sbot = Server(config)
 
 function createFeed (keys) {
+    // need to re-do this part,
+    // so that the `publish` function takes a msg and public key
     var feed = ssbFeed(sbot, keys)
+    return feed
 }
 
 module.exports = { createFeed }
 
 // save an updated list of methods this server has made public
 // in a location that ssb-client will know to check
-var manifest = sbot.getManifest()
+// var manifest = sbot.getManifest()
+// var manifest = {
+//     foo: 'async'
+// }
 // console.log('**manifest**', manifest)
 
-fs.writeFileSync(
-    path.join(__dirname, 'manifest.json'), // ~/.ssc/manifest.json
-    JSON.stringify(manifest)
-)
+// fs.writeFileSync(
+//     path.join(__dirname, 'manifest.json'), // ~/.ssc/manifest.json
+//     JSON.stringify(manifest)
+// )
 
 // return server
 
