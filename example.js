@@ -60,14 +60,7 @@ ws({
     // var keys = { public: 'a', private: 'b' }
     // var feed = createFeed(keys)
 
-    // should have
     var api = server.api
-
-    // var api = {
-    //     foo: function (arg, cb) {
-    //         process.nextTick(() => cb(null, arg))
-    //     }
-    // }
 
     // arguments are (remote, local)
     var rpcServer = muxrpc(null, manifest)(api)
