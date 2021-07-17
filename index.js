@@ -6,6 +6,7 @@ var caps = require('ssb-caps')
 // var fs = require('fs')
 var path = require('path')
 var ssc = require('@nichoth/ssc')
+var timestamp = require('monotonic-timestamp')
 
 var config = Config('ssc', { caps })
 var keyPath = path.join(config.path, 'secret')
@@ -51,7 +52,11 @@ var api = {
                 return cb(new Error('not valid'))
             }
 
-            sbot.add(msg, cb)
+            sbot.add({
+                key: ssc.getId(msg),
+                value: msg,
+                timestamp: timestamp()
+            }, cb)
         })
 
         // the bad part is that it needs private keys
