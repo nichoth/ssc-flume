@@ -28,6 +28,8 @@ function onConnect (err, wsStream) {
         console.log('closed', err)
     })
 
+    // should try sbot.publish
+
     console.log('sbot browser', sbot)
 
     sbot.foo('ok test', function (err, res) {

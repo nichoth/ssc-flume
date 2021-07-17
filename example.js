@@ -29,6 +29,7 @@ ws({
     // doesn't work
     // The return value (Boolean) of the function determines whether or not
     // to accept the handshake.
+    //
     // verifyClient: function (info, cb) {
     //     // console.log('***verify client***', info)
     //     var { req } = info
@@ -46,6 +47,8 @@ ws({
 
     //     // just accept any connections for now
     //     // but would want to verify the `write` requests
+    //     cb(null)
+
     //     return true
     // }
 
