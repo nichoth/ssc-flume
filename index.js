@@ -23,12 +23,12 @@ Server
 // this way you re-use the same sbot over many connections
 var sbot = Server(config)
 
-function createFeed (keys) {
-    // need to re-do this part,
-    // so that the `publish` function takes a msg and public key
-    var feed = ssbFeed(sbot, keys)
-    return feed
-}
+// function createFeed (keys) {
+//     // need to re-do this part,
+//     // so that the `publish` function takes a msg and public key
+//     var feed = ssbFeed(sbot, keys)
+//     return feed
+// }
 
 var manifest = {
     foo: 'async',
@@ -75,8 +75,7 @@ var api = {
     }
 }
 
-
-module.exports = { api, createFeed, manifest }
+module.exports = { api, /*createFeed,*/ manifest }
 
 // save an updated list of methods this server has made public
 // in a location that ssb-client will know to check
