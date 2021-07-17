@@ -17,6 +17,7 @@ config.keys = ssbKeys.loadOrCreateSync(keyPath)
 Server
     .use(require('ssb-master'))
     .use(require('ssb-gossip'))
+    .use(require('ssb-friends'))
     // .use(require('ssb-replicate'))
     .use(require('ssb-backlinks'))
 
