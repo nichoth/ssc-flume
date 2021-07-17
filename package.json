@@ -31,12 +31,17 @@
     "uglifyify": "^5.0.2"
   },
   "dependencies": {
+    "@nichoth/ssc": "^0.0.11",
     "muxrpc": "^6.5.3",
     "pull-ws": "^3.3.2",
     "ssb-backlinks": "^2.1.1",
     "ssb-caps": "^1.1.0",
     "ssb-config": "^3.4.5",
+    "ssb-conn": "^5.1.0",
+    "ssb-db2": "^2.1.4",
+    "ssb-ebt": "^7.0.2",
     "ssb-feed": "^2.3.0",
+    "ssb-friends": "^5.0.0",
     "ssb-gossip": "^1.1.1",
     "ssb-keys": "^7.2.2",
     "ssb-master": "^1.0.3",

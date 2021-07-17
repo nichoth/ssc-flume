@@ -1,9 +1,8 @@
 var muxrpc = require('muxrpc')
 var wsClient = require('pull-ws/client')
 var S = require('pull-stream')
-var WS_PORT = '8888'
 // replace this with the real URL
-var WS_URL = 'ws://localhost:' + WS_PORT
+var WS_URL = 'ws://localhost:8888'
 // var manifest = require('./manifest.json')
 
 wsClient(WS_URL, {

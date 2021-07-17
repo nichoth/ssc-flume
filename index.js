@@ -5,6 +5,7 @@ var ssbKeys = require('ssb-keys')
 var caps = require('ssb-caps')
 // var fs = require('fs')
 var path = require('path')
+var ssc = require('@nichoth/ssc')
 
 var config = Config('ssc', { caps })
 var keyPath = path.join(config.path, 'secret')
@@ -15,7 +16,7 @@ config.keys = ssbKeys.loadOrCreateSync(keyPath)
 Server
     .use(require('ssb-master'))
     .use(require('ssb-gossip'))
-    .use(require('ssb-replicate'))
+    // .use(require('ssb-replicate'))
     .use(require('ssb-backlinks'))
 
 // this way you re-use the same sbot over many connections
@@ -35,14 +36,37 @@ var manifest = {
 
 var api = {
     foo: function (arg, cb) {
+        console.log('foo', arg)
         process.nextTick(() => cb(null, arg))
     },
 
-    publish: function (msg, cb) {
+    publish: function ({ msg, keys }, cb) {
         // you can verify the msg just with the msg itself
         // public key is the auther ID
         // use the public key to check the authenticity
-        process.nextTick(() => cb(null, msg))
+
+        sbot.getLatest(keys.id, function (err, prev) {
+            if (err) return cb(err)
+            if ( !ssc.isValidMsg(msg, prev, { public: keys.public }) ) {
+                return cb(new Error('not valid'))
+            }
+
+            sbot.add(msg, cb)
+        })
+
+        // the bad part is that it needs private keys
+        // var feed = ssbFeed(sbot, alice)
+        // feed.publish({
+        //     type: 'post',
+        //     text: 'hello world, I am alice.'
+        // }, function (err) { ... })
+
+
+        // also: are you following this id?
+
+        // the msg should be fully formed, signed with the priv key
+
+        // process.nextTick(() => cb(null, msg))
     }
 }
 
