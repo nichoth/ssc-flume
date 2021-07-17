@@ -1,5 +1,5 @@
 var Server = require('ssb-server')
-var ssbFeed = require('ssb-feed')
+// var ssbFeed = require('ssb-feed')
 var Config = require('ssb-config/inject')
 var ssbKeys = require('ssb-keys')
 var caps = require('ssb-caps')
@@ -22,13 +22,6 @@ Server
 
 // this way you re-use the same sbot over many connections
 var sbot = Server(config)
-
-// function createFeed (keys) {
-//     // need to re-do this part,
-//     // so that the `publish` function takes a msg and public key
-//     var feed = ssbFeed(sbot, keys)
-//     return feed
-// }
 
 var manifest = {
     foo: 'async',
@@ -59,36 +52,8 @@ var api = {
             }, cb)
         })
 
-        // the bad part is that it needs private keys
-        // var feed = ssbFeed(sbot, alice)
-        // feed.publish({
-        //     type: 'post',
-        //     text: 'hello world, I am alice.'
-        // }, function (err) { ... })
-
-
         // also: are you following this id?
-
-        // the msg should be fully formed, signed with the priv key
-
-        // process.nextTick(() => cb(null, msg))
     }
 }
 
 module.exports = { api, /*createFeed,*/ manifest }
-
-// save an updated list of methods this server has made public
-// in a location that ssb-client will know to check
-// var manifest = sbot.getManifest()
-// var manifest = {
-//     foo: 'async'
-// }
-// console.log('**manifest**', manifest)
-
-// fs.writeFileSync(
-//     path.join(__dirname, 'manifest.json'), // ~/.ssc/manifest.json
-//     JSON.stringify(manifest)
-// )
-
-// return server
-

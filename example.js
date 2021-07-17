@@ -3,8 +3,7 @@ var http = require('http')
 var WS_PORT = process.env.WS_PORT || 8888
 var ws = require('pull-ws/server')
 var muxrpc = require('muxrpc')
-var server = require('./')
-var { manifest, api } = server
+var { manifest, api } = require('./')
 // var manifest = require('./manifest.json')
 
 // in here, we make an http & ws server that makes calls to the ssb feed
@@ -26,44 +25,23 @@ var httpServer = http.createServer(function onRequest (req, res) {
 ws({
     server: httpServer,
 
-    // doesn't work
-    // The return value (Boolean) of the function determines whether or not
-    // to accept the handshake.
-    //
-    // verifyClient: function (info, cb) {
-    //     // console.log('***verify client***', info)
-    //     var { req } = info
+    verifyClient: function (info, cb) {
+        var { req } = info
 
+        console.log('**headers**', req.headers)
+        // console.log('**info**', info)
+        console.log('**origin**', info.origin)
+        console.log('**secure**', info.secure)
 
-    //     // req.headers
-    //     // { upgrade: 'websocket' }
-
-
-    //     // console.log('***origin***', info.origin)
-    //     // console.log('***req***', info.req)
-    //     // console.log('***secure***', info.secure)
-    //     console.log('**headers**', req.headers)
-    //     // console.log('verify client cb', cb)
-
-    //     // just accept any connections for now
-    //     // but would want to verify the `write` requests
-    //     cb(null)
-
-    //     return true
-    // }
+        cb(true)
+        // return true
+    }
 
 }, function onConnection (wsStream) {
     console.log('got ws connection')
 
-    // on connection, how do we get the keys?
-
     // need to verify that the connector has the corresponding private key
     // for a given public key
-
-    // var keys = { public: 'a', private: 'b' }
-    // var feed = createFeed(keys)
-
-    // var api = server.api
 
     // arguments are (remote, local)
     var rpcServer = muxrpc(null, manifest)(api)
