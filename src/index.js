@@ -38,3 +38,4 @@ function onConnect (err, wsStream) {
 
     S(wsStream, rpcStream, wsStream)
 }
+

@@ -58,3 +58,4 @@ var api = {
 }
 
 module.exports = { api, /*createFeed,*/ manifest }
+
